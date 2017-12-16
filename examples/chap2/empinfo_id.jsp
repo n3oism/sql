@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>test</title>
+<title>opensecurelab</title>
 </head>
 <body>
 <table border=1 cellpadding=5 cellspacing=0>
