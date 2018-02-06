@@ -18,7 +18,7 @@ Participants in <%=_date%><br><br>
 		<td>HireDate</td>
 	<tr>
  <%
-   sql = "select * from employees where hire_date=to_char('" + _date + "','YYYY-MM-DD')";
+   sql = "select * from employees where hire_date=to_date('" + _date + "','YYYY-MM-DD')";
    stmt = con.createStatement();
    rs = stmt.executeQuery(sql);
 
