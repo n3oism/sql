@@ -2,14 +2,14 @@
 <%@ include file="dbcon.jsp"%>
 <%@ page import="java.util.*,java.text.*"%>
 <%
-String _year = request.getParameter("year");
+String _date = request.getParameter("date");
 %>
 <html>
 <head>
 <title>opensecurelab</title>
 </head>
 <body>
-Participants in <%=_year%><br><br>
+Participants in <%=_date%><br><br>
 <table border=1 cellpadding=5 cellspacing=0>
 	<tr>
 		<td>Employee ID</td>
@@ -18,7 +18,7 @@ Participants in <%=_year%><br><br>
 		<td>HireDate</td>
 	<tr>
  <%
-   sql = "select * from employees where to_char(hire_date,'YYYY')='" + _year + "'";
+   sql = "select * from employees where hire_date=to_char('" + _date + "','YYYY-MM-DD')";
    stmt = con.createStatement();
    rs = stmt.executeQuery(sql);
 
