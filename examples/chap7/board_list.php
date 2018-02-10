@@ -32,8 +32,8 @@ if(isset($_GET['subject'])) $_search  = $_GET['subject'];
 
 $sql    = 'select * from board where subject=\'' . $_search . '\'';
 
-if ($_search!="") { 
-	$result = mysql_query($sql, $link);
+if ($_search!="") {
+	if(strpos($_search,"union")==FALSE) $result = mysql_query($sql, $link);
 	if (!$result) {
 		echo "DB Error, could not query the database\n";
 		exit;
@@ -53,9 +53,9 @@ print "\t<tr>\n\t\t<td width=\"20\">num</td>".
 	"<td width=\"80\">date</td>" . 
 	"<td width=\"20\">count</td>\n\t</tr>";
 
-if (!$result) {
+if ($result) {
 	while ($row = mysql_fetch_assoc($result)) {
-		print "\t<tr>\n\t\t<td>" . $row['num'] . "</td><td>" . 
+		print "\t<tr>\n\t\t<td>" . $row['idx'] . "</td><td>" . 
 		$row['subject'] . "</td><td>" . $row['writer'] . "</td><td>" .
 		$row['reg_date'] . "</td><td>" . $row['readcount'] . "\n\t</tr>\n";
 	}
