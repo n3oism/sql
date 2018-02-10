@@ -59,8 +59,7 @@ if ($result) {
 		$row['subject'] . "</td><td>" . $row['writer'] . "</td><td>" .
 		$row['reg_date'] . "</td><td>" . $row['readcount'] . "\n\t</tr>\n";
 	}
+	mysql_free_result($result);
 }
 print "</table>\n";
-
-mysql_free_result($result);
 ?>
