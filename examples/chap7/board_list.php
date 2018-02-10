@@ -1,17 +1,15 @@
 <?php
 
-if (!$link = mysql_connect('localhost', 'root', 'root')) {
-	echo 'Could not connect to mysql';
-	exit;
-}
+$mysqli = new mysqli('localhost', 'root', 'root', 'northwind');
 
-if (!mysql_select_db('northwind', $link)) {
-    echo 'Could not select database';
+if (mysqli_connect_errno()) {
+    printf("Connection failed: %s\n",mysqli_connect_error());
     exit;
 }
 
 $queryCheck="select 1 from board";
-$result = mysql_query($queryCheck, $link);
+$result = $mysqli->query($queryCheck);
+
 if($result == FALSE){
     $createQuery="CREATE TABLE board (" .
 		 "idx int(11) AUTO_INCREMENT PRIMARY KEY," .
@@ -23,7 +21,7 @@ if($result == FALSE){
 		 "readcount INT DEFAULT 0," .
 		 "content TEXT NOT NULL," .
 		 "ip VARCHAR(20) NOT NULL);";
-    $result = mysql_query($createQuery, $link);
+    $result = $mysqli->query($createQuery);
 }
 
 $_search = "";
@@ -33,7 +31,7 @@ if(isset($_GET['subject'])) $_search  = $_GET['subject'];
 $sql    = 'select * from board where subject=\'' . $_search . '\'';
 
 if ($_search!="") {
-	if(strpos($_search,"union")==FALSE) $result = mysql_query($sql, $link);
+	if(strpos($_search,"union")==FALSE) $result = $mysqli->query($sql);
 	if (!$result) {
 		echo "DB Error, could not query the database\n";
 		exit;
@@ -54,12 +52,12 @@ print "\t<tr>\n\t\t<td width=\"20\">num</td>".
 	"<td width=\"20\">count</td>\n\t</tr>";
 
 if ($result) {
-	while ($row = mysql_fetch_assoc($result)) {
+	while ($row = $result->fetch_row()) {
 		print "\t<tr>\n\t\t<td>" . $row['idx'] . "</td><td>" . 
 		$row['subject'] . "</td><td>" . $row['writer'] . "</td><td>" .
 		$row['reg_date'] . "</td><td>" . $row['readcount'] . "\n\t</tr>\n";
 	}
-	mysql_free_result($result);
+	$mysqli->close();
 }
 print "</table>\n";
 ?>
