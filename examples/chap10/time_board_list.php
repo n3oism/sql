@@ -30,9 +30,12 @@ if(isset($_GET['subject'])) $_search  = $_GET['subject'];
 
 $sql    = 'select * from board where subject=\'' . $_search . '\'';
 
+$time1  = microtime(true);
 if ($_search!="") {
 	if(strpos($_search,"union")==FALSE) $result = $mysqli->query($sql);
 }
+$time2 = microtime(true);
+$timegap = round($time2 - $time1,3)*1000;
 
 print "<form action=\"" . $_SERVER['PHP_SELF'] . "\">\n";
 print "제목검색 : ";
@@ -56,4 +59,5 @@ if ($result) {
 	$mysqli->close();
 }
 print "</table>\n";
+print "Time Delay : $timegap millisecond"
 ?>
