@@ -29,4 +29,4 @@ for i in range(0,count):
 	response = conn.getresponse().read()
 	
 	print str(i) + " : " + response.split(delims)[1]
-	time.sleep(100.0 / 1000.0)
+	time.sleep(100.0 / 1000.0) 
