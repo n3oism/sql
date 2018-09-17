@@ -20,6 +20,7 @@
    if (_tname==null) {
        _tname="employees";
    }
+   
    sql = "select * from " + _tname + " where employee_id=?";
    pstmt = con.prepareStatement(sql);
 
