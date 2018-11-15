@@ -42,16 +42,16 @@ if (isset($_POST['idx'])) $_idx = $_POST['idx'];
 $sql = "delete from USERS where idx=$_idx";
 $result = mysql_query($sql, $link);
 
-echo 'Record Deleted : ' . mysql_affected_rows();
-
-$sql = "select * from USERS";
-$result = mysql_query($sql, $link);
-
 if (!$result) {
     echo "DB Error, could not query the database\n";
     echo 'MySQL Error: ' . mysql_error();
     exit;
 }
+
+echo 'Record Deleted : ' . mysql_affected_rows();
+
+$sql = "select * from USERS";
+$result = mysql_query($sql, $link);
 
 print "<table border=1 cellpadding=5 cellspacing=0>\n";
 print "\t<tr>\n\t\t<td width='50'>num</td><td width='120'>id</td><td width='240'>name</td><td width='50'>Edit</td>\n\t</tr>\n";
